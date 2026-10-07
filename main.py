@@ -1,47 +1,10 @@
 import asyncio
 import time
-
 import flet as ft
 
-class ТаблоТаймера(ft.Text):
-    def __init__(self):
-        super().__init__(value="00:00:00", size=30, weight=ft.FontWeight.BOLD)
-
-
-class КнопкаУправления(ft.FilledButton):
-    def __init__(self, действие_при_клике):
-        super().__init__(
-            "Start",
-            icon=ft.Icons.PLAY_ARROW_ROUNDED,
-            on_click=действие_при_клике,
-            style=ft.ButtonStyle(
-                shape=ft.RoundedRectangleBorder(radius=8),
-                padding=15
-            )
-        )
-
-
-class КнопкаСброса(ft.TextButton):
-    def __init__(self, действие_при_клике):
-        super().__init__(
-            "Stop",
-            icon=ft.Icons.STOP_CIRCLE_ROUNDED,
-            disabled=True,
-            on_click=действие_при_клике,
-            style=ft.ButtonStyle(
-                shape=ft.StadiumBorder(),
-                padding=15
-            )
-        )
-
-
-def format_hhmmss(seconds: int) -> str:
-    # Функция для форматирования секунд в формат ЧЧ:ММ:СС
-    h = seconds // 3600
-    m = (seconds % 3600) // 60
-    s = seconds % 60
-    return f"{h:02}:{m:02}:{s:02}"
-
+# Importing our custom components and logic from separate files
+from components import TimerDisplay, ControlButton, ResetButton
+from logic import format_hhmmss
 
 def main(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
@@ -60,7 +23,6 @@ def main(page: ft.Page):
         )
     )
 
-    # Функции-обработчики для кнопок
     def handle_toggle(e):
         nonlocal running, paused, elapsed, base_elapsed, started_at
 
@@ -93,9 +55,10 @@ def main(page: ft.Page):
         started_at = 0.0
         sync_ui()
 
-    timer = ТаблоТаймера()
-    toggle_btn = КнопкаУправления(действие_при_клике=handle_toggle)
-    stop_btn = КнопкаСброса(действие_при_клике=handle_stop)
+    # Creating instances of our custom English-named components
+    timer = TimerDisplay()
+    toggle_btn = ControlButton(click_action=handle_toggle)
+    stop_btn = ResetButton(click_action=handle_stop)
 
     def sync_ui():
         nonlocal elapsed
@@ -122,7 +85,7 @@ def main(page: ft.Page):
     page.add(
         ft.Container(
             image=ft.DecorationImage(
-                src="https://i.pinimg.com/736x/da/44/83/da448376d3145d26a82d51359b8dad1f.jpg",
+                src="https://pinimg.com",
                 fit=ft.BoxFit.COVER,
             ),
             expand=True,
