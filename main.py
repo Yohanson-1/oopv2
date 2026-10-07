@@ -85,7 +85,7 @@ def main(page: ft.Page):
     page.add(
         ft.Container(
             image=ft.DecorationImage(
-                src="https://pinimg.com",
+                src="https://i.pinimg.com/736x/da/44/83/da448376d3145d26a82d51359b8dad1f.jpg",
                 fit=ft.BoxFit.COVER,
             ),
             expand=True,
