@@ -3,7 +3,7 @@ import time  # Модуль для замера точного системно�
 import flet as ft  # Импортируем Flet под коротким именем ft
 
 # Импортируем наши переопределенные ООП-классы и функцию из соседних файлов модулей
-from components import TimerDisplay, ControlButton, ResetButton
+from src.components import TimerDisplay, ControlButton, ResetButton
 from logic import format_hhmmss
 
 # Главная функция приложения, управляющая страницей (page)
